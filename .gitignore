@@ -11,7 +11,6 @@ __pycache__/
 data/interim/
 data/processed/
 data/raw/*.csv
-models/*.pkl
 
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints/
