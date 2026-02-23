@@ -29,27 +29,27 @@ The system is designed with a strict modular architecture separating data proces
 ```mermaid
 graph TD
     subgraph Data Pipeline
-        A[Raw Datasets <br> True.csv & Fake.csv] --> B(Data Loader)
+        A["Raw Datasets (True.csv & Fake.csv)"] --> B(Data Loader)
         B --> C{Text Cleaner}
-        C -- Regex Bias Mitigation & <br> Stopword Removal --> D[Processed Text]
+        C -- "Regex Bias Mitigation & Stopword Removal" --> D[Processed Text]
     end
 
     subgraph Feature Engineering & Training
         D --> E[TF-IDF Vectorizer]
-        E -- 5000 Max Features <br> Bi-grams --> F[Document-Term Matrix]
+        E -- "5000 Max Features (Bi-grams)" --> F["Document-Term Matrix"]
         F --> G(Logistic Regression Model)
-        G -- Evaluated on Test Set --> H[(Serialized Models <br> .pkl)]
+        G -- "Evaluated on Test Set" --> H[("Serialized Models (.pkl)")]
     end
 
-    subgraph Presentation Layer <br> app.py
+    subgraph Presentation Layer (app.py)
         I[User Input Text] --> J{Text Cleaner}
         J --> K[Loaded TF-IDF Vectorizer]
         K --> L[Loaded Prediction Model]
-        L --> M((Credibility Score <br> & UI Render))
+        L --> M(("Credibility Score & UI Render"))
     end
     
-    H -. Loads into .-> K
-    H -. Loads into .-> L
+    H -. "Loads into" .-> K
+    H -. "Loads into" .-> L
 ```
 
 ### Module Breakdown (src/)
