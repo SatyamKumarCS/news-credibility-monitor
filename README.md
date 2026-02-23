@@ -6,6 +6,8 @@
 ![Pandas](https://img.shields.io/badge/Pandas-2.2.3-150458?logo=pandas)
 ![NLTK](https://img.shields.io/badge/NLTK-3.9.1-329539)
 
+![UI Screenshot](docs/ui.png)
+
 An intelligent NLP-powered web application that evaluates the credibility of news articles. By utilizing classical machine learning techniques (TF-IDF Vectorization and Logistic Regression), this system analyzes linguistic patterns to classify news articles as **Real** or **Fake**.
 
 This project represents **Milestone 1** of a larger initiative to build an agentic AI misinformation monitoring assistant.
@@ -23,6 +25,8 @@ This project represents **Milestone 1** of a larger initiative to build an agent
 ---
 
 ## 🏗️ System Architecture & Design
+
+![System Design Architecture](docs/system_design.png)
 
 The system is designed with a strict modular architecture separating data processing, feature engineering, model training, and the presentation layer.
 
