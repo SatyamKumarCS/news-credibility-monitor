@@ -26,31 +26,20 @@ This project represents **Milestone 1** of a larger initiative to build an agent
 
 The system is designed with a strict modular architecture separating data processing, feature engineering, model training, and the presentation layer.
 
-```mermaid
-graph TD
-    subgraph Data Pipeline
-        A["Raw Datasets (True.csv & Fake.csv)"] --> B(Data Loader)
-        B --> C{Text Cleaner}
-        C -- "Regex Bias Mitigation & Stopword Removal" --> D[Processed Text]
-    end
+### 1. Data Pipeline
+*   **Raw Datasets:** Loads `True.csv` and `Fake.csv` into memory.
+*   **Text Cleaner:** Parses text, applies Regex to mitigate publisher bias (e.g., stripping "Reuters"), removes punctuation, and filters out stopwords.
+*   **Processed Text:** Outputs a clean, standardized corpus ready for feature extraction.
 
-    subgraph Feature Engineering & Training
-        D --> E[TF-IDF Vectorizer]
-        E -- "5000 Max Features (Bi-grams)" --> F["Document-Term Matrix"]
-        F --> G(Logistic Regression Model)
-        G -- "Evaluated on Test Set" --> H[("Serialized Models (.pkl)")]
-    end
+### 2. Feature Engineering & Training
+*   **TF-IDF Vectorizer:** Converts the cleaned text corpus into a Document-Term Matrix, capped at 5000 max features using bi-grams.
+*   **Logistic Regression Model:** Trains on the vectorized data to learn the mathematical distinction between credible and non-credible language patterns.
+*   **Serialization:** Dumps the highly-accurate trained model and vectorizer to `.pkl` files on disk.
 
-    subgraph Presentation Layer (app.py)
-        I[User Input Text] --> J{Text Cleaner}
-        J --> K[Loaded TF-IDF Vectorizer]
-        K --> L[Loaded Prediction Model]
-        L --> M(("Credibility Score & UI Render"))
-    end
-    
-    H -. "Loads into" .-> K
-    H -. "Loads into" .-> L
-```
+### 3. Presentation Layer (Streamlit App)
+*   **User Input:** Accepts article text directly from the user via a web interface.
+*   **Live Processing:** Passes the input through the exact same `Text Cleaner` and loaded `TF-IDF Vectorizer` used during training.
+*   **Credibility Score:** The model evaluates the vector and returns a prediction along with a mathematical confidence score, dynamically rendering a Success or Error UI box.
 
 ### Module Breakdown (src/)
 *   `config.py`: Centralized configuration and file path management.
