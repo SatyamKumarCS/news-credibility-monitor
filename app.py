@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import joblib
 import pandas as pd
@@ -76,14 +77,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Load models
-@st.cache_resource
+@st.cache_resource(show_spinner="Loading NLP Models...")
 def load_models():
-    try:
-        model = joblib.load(MODEL_PATH)
-        vectorizer = joblib.load(VECTORIZER_PATH)
-        return model, vectorizer
-    except Exception as e:
+    if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
         return None, None
+    model = joblib.load(MODEL_PATH)
+    vectorizer = joblib.load(VECTORIZER_PATH)
+    return model, vectorizer
 
 model, vectorizer = load_models()
 
