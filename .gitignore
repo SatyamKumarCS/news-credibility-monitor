@@ -1,0 +1,20 @@
+# Virtual Environment
+venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Data and Models (Large Files)
+data/interim/
+data/processed/
+data/raw/*.csv
+models/*.pkl
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# OS Specific
+.DS_Store
